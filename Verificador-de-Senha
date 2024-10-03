@@ -1,0 +1,33 @@
+import random
+
+letras_maiusculas = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+letras_minusculas = set("abcdefghijklmnopqrstuvwxyz")
+caracteres_especiais = set("!@#*%&()-_")
+numeros = set("0123456789")
+
+def verificar_senha(password):
+    if len(password) < 10 or len(password) > 15:
+        return "A senha deve conter entre 10 e 15 caracteres."
+    if not any(letra in letras_maiusculas for letra in password):
+        return "A senha deve conter pelo menos uma letra maiúscula."
+    if not any(letra in letras_minusculas for letra in password):
+        return "A senha deve conter pelo menos uma letra minúscula."
+    if not any(caractere in caracteres_especiais for caractere in password):
+        return "A senha deve conter pelo menos um caractere especial."
+    if not any(numero in numeros for numero in password):
+        return "A senha deve conter pelo menos um número."
+    return "Senha aceita."
+
+print(" Olá, seja bem-vindo ao verifcador de senha!! \n ")
+print(" Para uma senha mais segura recomenda-se o uso das seguintes operações: \n")
+print(" #Uso de caracteres especiais \n #Letras maiúsculas \n #Letras minúsculas \n #Números \n")
+
+while True:
+    password = input(" Digite uma senha (10 a 15 caracteres): \n")
+    resultado = verificar_senha(password)
+    if resultado == "Senha aceita.":
+        break
+    else:
+        print(resultado)
+
+print("Muito bem!! Sua senha está segura!! Sua senha é: ", password)
