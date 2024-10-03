@@ -1,0 +1,59 @@
+import random
+
+letras_maiusculas = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+letras_minusculas = set("abcdefghijklmnopqrstuvwxyz")
+caracteres_especiais = set("!@#*%&()-_")
+numeros = set("0123456789")
+
+utilizacao_user_minusculas = int(input("Defina a quantidade de letras minúsculas na sua senha de 1 a 12: "))
+while utilizacao_user_minusculas < 1 or utilizacao_user_minusculas > 12:
+    utilizacao_user_minusculas = int(input("Por favor, insira um número de 1 a 12: "))
+
+while utilizacao_user_minusculas == 12:
+    utilizacao_user_maiusculas = 1
+    break
+if utilizacao_user_minusculas != 12:
+    utilizacao_user_maiusculas = int(input(f"Defina a quantidade de letras maiúsculas na sua senha de 1 a {15 - utilizacao_user_minusculas - 1 - 1}: "))
+while utilizacao_user_maiusculas < 1 or utilizacao_user_maiusculas > (15 - utilizacao_user_minusculas - 1 - 1):
+    utilizacao_user_maiusculas = int(input(f"Por favor, insira um número de 1 a {15 - utilizacao_user_minusculas - 1 - 1}: "))
+
+while utilizacao_user_maiusculas + utilizacao_user_minusculas == 13:
+    utilizacao_user_caracteres_especiais = 1
+    break
+if utilizacao_user_maiusculas != 1 and utilizacao_user_minusculas + utilizacao_user_maiusculas < 13:
+    utilizacao_user_caracteres_especiais = int(input(f"Defina a quantidade de caracteres especiais na sua senha de 1 a {15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - 1}: "))
+while utilizacao_user_caracteres_especiais < 1 or utilizacao_user_caracteres_especiais > (15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - 1):
+    utilizacao_user_caracteres_especiais = int(input(f"Por favor, insira um número de 1 a {15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - 1}: "))
+
+while utilizacao_user_maiusculas + utilizacao_user_minusculas + utilizacao_user_caracteres_especiais == 14:
+    utilizacao_user_numeros = 1
+    break
+if utilizacao_user_caracteres_especiais != 1 and utilizacao_user_caracteres_especiais + utilizacao_user_maiusculas + utilizacao_user_minusculas < 14:
+    utilizacao_user_numeros = int(input(f"Defina a quantidade de números na sua senha de 1 a {15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - utilizacao_user_caracteres_especiais}: "))
+while utilizacao_user_numeros < 1 or utilizacao_user_numeros > (15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - utilizacao_user_caracteres_especiais):
+    utilizacao_user_numeros = int(input(f"Por favor, insira um número de 1 a {15 - utilizacao_user_minusculas - utilizacao_user_maiusculas - utilizacao_user_caracteres_especiais}: "))
+
+letras_minusculas_escolhidas = random.choices(list(letras_minusculas), k=utilizacao_user_minusculas)
+letras_maiusculas_escolhidas = random.choices(list(letras_maiusculas), k=utilizacao_user_maiusculas)
+caracteres_especiais_escolhidos = random.choices(list(caracteres_especiais), k=utilizacao_user_caracteres_especiais)
+numeros_escolhidos = random.choices(list(numeros), k=utilizacao_user_numeros)
+
+senha = letras_minusculas_escolhidas + letras_maiusculas_escolhidas + caracteres_especiais_escolhidos + numeros_escolhidos
+random.shuffle(senha)
+
+senha_final = ''.join(senha)
+
+leitor_de_quantidade = len(senha_final)
+
+if leitor_de_quantidade > 15:
+    confirmação_senha_grande = int(input(
+        "Por favor, tem certeza que sua senha vai conter mais de 15 carácteres? Digite 1 para confirmar: "))
+    if confirmação_senha_grande == 1:
+        print(f"Ok, a sua senha gerada foi a seguinte: {senha_final}")
+
+if 10 <= leitor_de_quantidade <= 15:
+    print(f"Muito bem, a senha gerada foi a seguinte: {senha_final}")
+
+if leitor_de_quantidade < 10:
+    print("Por favor, repite o processo, uma senha segura deve conter pelo menos 10 caracteres")
+
